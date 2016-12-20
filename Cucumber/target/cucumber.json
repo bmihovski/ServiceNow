@@ -1,0 +1,164 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 108289688,
+              "status": "passed"
+            },
+            "match": {
+              "location": "StepDef.setUP()"
+            }
+          }
+        ],
+        "line": 3,
+        "name": "Verify ServiceNow SignUp",
+        "description": "",
+        "id": "navigate-to-https://dev20709.service-now.com/navpage.do-site;verify-servicenow-signup",
+        "after": [
+          {
+            "result": {
+              "duration": 1405549550,
+              "status": "passed"
+            },
+            "match": {
+              "location": "StepDef.embedScreenshot(Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 16427774946,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I go to \"https://dev20709.service-now.com/navpage.do\" on \"chrome\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "https://dev20709.service-now.com/navpage.do",
+                  "offset": 9
+                },
+                {
+                  "val": "chrome",
+                  "offset": 58
+                }
+              ],
+              "location": "StepDef.I_go_to(String,String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 5255174266,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I enter text into \"usernametextbox\" as \"admin\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "usernametextbox",
+                  "offset": 19
+                },
+                {
+                  "val": "admin",
+                  "offset": 40
+                }
+              ],
+              "location": "StepDef.I_enter_text_into(String,String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5155941682,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I enter text into \"passwordtextbox\" as \"Google@123\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "passwordtextbox",
+                  "offset": 19
+                },
+                {
+                  "val": "Google@123",
+                  "offset": 40
+                }
+              ],
+              "location": "StepDef.I_enter_text_into(String,String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 16560014642,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I click on \"siginInbtn\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "siginInbtn",
+                  "offset": 12
+                }
+              ],
+              "location": "StepDef.I_click_on(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3131906148,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I click on \"userInfo\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "userInfo",
+                  "offset": 12
+                }
+              ],
+              "location": "StepDef.I_click_on(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5695215215,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I clicked \"logOutlink\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "logOutlink",
+                  "offset": 11
+                }
+              ],
+              "location": "StepDef.I_clicked(String)"
+            },
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "Navigate to https://dev20709.service-now.com/navpage.do Site",
+    "description": "",
+    "id": "navigate-to-https://dev20709.service-now.com/navpage.do-site",
+    "keyword": "Feature",
+    "uri": "src/main/resources/ServiceNowLogin_LogOut.feature"
+  }
+]
