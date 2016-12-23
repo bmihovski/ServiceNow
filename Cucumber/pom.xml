@@ -39,7 +39,18 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.wnameless/json-flattener -->
+<dependency>
+    <groupId>com.github.wnameless</groupId>
+    <artifactId>json-flattener</artifactId>
+    <version>0.2.3</version>
+</dependency>
 		
+		<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20090211</version>
+</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

@@ -2,7 +2,10 @@ package com.test.utils;
 
  
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -10,6 +13,7 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -23,64 +27,84 @@ public class FinalPDFReport {
 		Font blueFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, new CMYKColor(255, 0, 0, 0));
 		Font redFont = FontFactory.getFont(FontFactory.COURIER, 12, Font.BOLD, new CMYKColor(0, 255, 0, 0));
 		Font yellowFont = FontFactory.getFont(FontFactory.COURIER, 14, Font.BOLD, new CMYKColor(0, 0, 255, 0));
-	    Document document = new Document();
+	    //Document document = new Document();
+		
+		 float left = 30;
+	        float right = 30;
+	        float top = 60;
+	        float bottom = 0;
+	        Document document = new Document(PageSize.A4, left, right, top, bottom);
 	    try
 	    {
+	    	
+	    	
 	        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("D:\\PDF_Test\\FinalResultPDFExample.pdf"));
 	        document.open();
-	 
+	        
+	          List<String> list = new ArrayList<String>(tStepsImages.values());
+	          List<String> list2 = new ArrayList<String>(tSteps.values());
+	          List<String> list3 = new ArrayList<String>(tSteps.keySet());
+	          String[] IMAGES = new String[list.size()];
+	          IMAGES = list.toArray(IMAGES);
+	        Image img = Image.getInstance(IMAGES[0]);
+	        document.setPageSize(img);
+	        //document.setPageCount(2);
 	        PdfPTable table = new PdfPTable(1); // 3 columns.
 	        table.setWidthPercentage(100); //Width 100%
 	        table.setSpacingBefore(10f); //Space before table
 	        table.setSpacingAfter(10f); //Space after table
-	 
+	    
 	        //Set Column widths
 	        float[] columnWidths = {1f };
 	        table.setWidths(columnWidths);
 	        
-	        PdfPCell testSuites = new PdfPCell(new Paragraph("TC_Suites :                                 "+testcaseDetails.get("tSdesc")   )); 
+	        PdfPCell testSuites = new PdfPCell(new Paragraph("TC_Suites :        "+testcaseDetails.get("tSdesc")   )); 
 	        testSuites.setBorderColor(BaseColor.BLUE);
 	        testSuites.setPaddingLeft(10);
 	        testSuites.setHorizontalAlignment(Element.ALIGN_LEFT);
 	        testSuites.setVerticalAlignment(Element.ALIGN_MIDDLE);
 	 
 
-	        PdfPCell testCases = new PdfPCell(new Paragraph("TC_Name :                                   "+testcaseDetails.get("tCdesc") )); 
+	        PdfPCell testCases = new PdfPCell(new Paragraph("TC_Name :           "+testcaseDetails.get("tCdesc") )); 
 	        testCases.setBorderColor(BaseColor.BLUE);
 	        testCases.setPaddingLeft(10);
 	        testCases.setHorizontalAlignment(Element.ALIGN_LEFT);
 	        testCases.setVerticalAlignment(Element.ALIGN_MIDDLE);
-	        PdfPCell testSteps = new PdfPCell(new Paragraph("TC_Name :                                   "+testcaseDetails.get("tStepdesc") )); 
+	       /* PdfPCell testSteps = new PdfPCell(new Paragraph("TC_Name :          "+testcaseDetails.get("tStepdesc") )); 
 	        testSteps.setBorderColor(BaseColor.BLUE);
 	        testSteps.setPaddingLeft(10);
 	        testSteps.setHorizontalAlignment(Element.ALIGN_LEFT);
 	        testSteps.setVerticalAlignment(Element.ALIGN_MIDDLE);
+	        */
+	        PdfPCell testResult = new PdfPCell(new Paragraph("TC_Result :        "+testcaseDetails.get("TestCaseResult") )); 
+	        testResult.setBorderColor(BaseColor.BLUE);
+	        testResult.setPaddingLeft(10);
+	        testResult.setHorizontalAlignment(Element.ALIGN_LEFT);
+	        testResult.setVerticalAlignment(Element.ALIGN_MIDDLE);
 	        
-	        PdfPCell testResult = new PdfPCell(new Paragraph("TC_Result :                                   "+testcaseDetails.get("TestCaseResult") )); 
-	        testSteps.setBorderColor(BaseColor.BLUE);
-	        testSteps.setPaddingLeft(10);
-	        testSteps.setHorizontalAlignment(Element.ALIGN_LEFT);
-	        testSteps.setVerticalAlignment(Element.ALIGN_MIDDLE);
+	        Paragraph tsteps= new Paragraph(testcaseDetails.get("tStepdesc")) ;
 	        
 	        table.addCell(testSuites);
 	        table.addCell(testCases);
-	        table.addCell(testSteps);
+	        //table.addCell(testSteps);
 	        table.addCell(testResult);
 	        document.add(table);
-	        /*
-	        Image img = Image.getInstance(IMAGES[0]);
-	        Document document = new Document(img);
-	        PdfWriter.getInstance(document, new FileOutputStream(dest));
-	        document.open();
+	        document.add(tsteps);
+
+	       int i=0;
+	       // document.open();
 	        for (String image : IMAGES) {
 	            img = Image.getInstance(image);
-	            document.setPageSize(img);
-	            document.newPage();
-	           // img.setAbsolutePosition(50, 50);
-	            img.scaleAbsolute(1300,800);
+
+	           // document.setPageSize(img);
+	            document.add(new Paragraph(list3.get(i)+" : "+list2.get(i)));
+	          // document.newPage();
+	           // img.setAbsolutePosition(0, 0);
+	           img.scaleAbsolute(400,150);
 	            document.add(img);
+	            i++;
 	        }
-	       */
+	   
 	        document.close();
 	        writer.close();
 	    } catch (Exception e)
@@ -103,21 +127,22 @@ public class FinalPDFReport {
 		testcaseDetails.put("tStepdesc", "TestSteps:");
 		testcaseDetails.put("TestCaseResult", "Passed");
 		
-		HashMap<String,String> tSteps=new HashMap<String,String>();
+		LinkedHashMap<String,String> tSteps=new LinkedHashMap<String,String>();
 		tSteps.put("Step1 :", "Click on the URL");
 		tSteps.put("Step2 :", "Enter the UserName");
 		tSteps.put("Step3 :", "Enter the Password");
 		tSteps.put("Step4 :", "Click on the Submit Button");
 		
-		HashMap<String,String> tStepsImages=new HashMap<String,String>();
+		LinkedHashMap<String,String> tStepsImages=new LinkedHashMap<String,String>();
 		
-		tStepsImages.put("Step1Image", "D:\\API\\Cloud Environment not accessible.png");
-		tStepsImages.put("Step2Image", "D:\\API\\Cloud Environment not accessible.png");
-		tStepsImages.put("Step3Image", "D:\\API\\Cloud Environment not accessible.png");
-		tStepsImages.put("Step4Image", "D:\\API\\Cloud Environment not accessible.png");
+		tStepsImages.put("Step1", "D:\\API\\FlipkartLoginPage.png");
+		tStepsImages.put("Step2", "D:\\API\\Flipkart_EnterUserName.png");
+		tStepsImages.put("Step3", "D:\\API\\Flipkart_EnterPassword.png");
+		tStepsImages.put("Step4", "D:\\API\\Flipkart_ClickonLoginButton.png");
 		
 		FinalPDFReport f=new FinalPDFReport();
 		f.createResultPDF( testcaseDetails, tSteps,  tStepsImages );
+		System.out.println("PDF generated");
 		
 	}
 
