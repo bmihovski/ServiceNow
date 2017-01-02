@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -22,7 +23,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class FinalPDFReport {
 	
-	public void createResultPDF(HashMap<String,String> testcaseDetails,HashMap<String,String> tSteps,HashMap<String,String> tStepsImages ){
+	public void createResultPDF(Map<String, String> map,Map<String, String> map2,Map<String, String> map3,String testCaseName ){
+
 		
 		Font blueFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, new CMYKColor(255, 0, 0, 0));
 		Font redFont = FontFactory.getFont(FontFactory.COURIER, 12, Font.BOLD, new CMYKColor(0, 255, 0, 0));
@@ -38,12 +40,12 @@ public class FinalPDFReport {
 	    {
 	    	
 	    	
-	        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("D:\\PDF_Test\\FinalResultPDFExample.pdf"));
+	        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("D:\\PDF_Test\\"+testCaseName+".pdf"));
 	        document.open();
 	        
-	          List<String> list = new ArrayList<String>(tStepsImages.values());
-	          List<String> list2 = new ArrayList<String>(tSteps.values());
-	          List<String> list3 = new ArrayList<String>(tSteps.keySet());
+	          List<String> list = new ArrayList<String>(map3.values());
+	          List<String> list2 = new ArrayList<String>(map2.values());
+	          List<String> list3 = new ArrayList<String>(map2.keySet());
 	          String[] IMAGES = new String[list.size()];
 	          IMAGES = list.toArray(IMAGES);
 	        Image img = Image.getInstance(IMAGES[0]);
@@ -58,14 +60,14 @@ public class FinalPDFReport {
 	        float[] columnWidths = {1f };
 	        table.setWidths(columnWidths);
 	        
-	        PdfPCell testSuites = new PdfPCell(new Paragraph("TC_Suites :        "+testcaseDetails.get("tSdesc")   )); 
+	        PdfPCell testSuites = new PdfPCell(new Paragraph("TC_Suites :        "+map.get("tSdesc")   )); 
 	        testSuites.setBorderColor(BaseColor.BLUE);
 	        testSuites.setPaddingLeft(10);
 	        testSuites.setHorizontalAlignment(Element.ALIGN_LEFT);
 	        testSuites.setVerticalAlignment(Element.ALIGN_MIDDLE);
 	 
 
-	        PdfPCell testCases = new PdfPCell(new Paragraph("TC_Name :           "+testcaseDetails.get("tCdesc") )); 
+	        PdfPCell testCases = new PdfPCell(new Paragraph("TC_Name :           "+map.get("tCdesc") )); 
 	        testCases.setBorderColor(BaseColor.BLUE);
 	        testCases.setPaddingLeft(10);
 	        testCases.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -76,13 +78,13 @@ public class FinalPDFReport {
 	        testSteps.setHorizontalAlignment(Element.ALIGN_LEFT);
 	        testSteps.setVerticalAlignment(Element.ALIGN_MIDDLE);
 	        */
-	        PdfPCell testResult = new PdfPCell(new Paragraph("TC_Result :        "+testcaseDetails.get("TestCaseResult") )); 
+	        PdfPCell testResult = new PdfPCell(new Paragraph("TC_Result :        "+map.get("TestCaseResult") )); 
 	        testResult.setBorderColor(BaseColor.BLUE);
 	        testResult.setPaddingLeft(10);
 	        testResult.setHorizontalAlignment(Element.ALIGN_LEFT);
 	        testResult.setVerticalAlignment(Element.ALIGN_MIDDLE);
 	        
-	        Paragraph tsteps= new Paragraph(testcaseDetails.get("tStepdesc")) ;
+	        Paragraph tsteps= new Paragraph(map.get("tStepdesc")) ;
 	        
 	        table.addCell(testSuites);
 	        table.addCell(testCases);
@@ -118,9 +120,9 @@ public class FinalPDFReport {
 	public static void main(String[] args) {
 	 
 		HashMap<String,String> testcaseDetails= new HashMap<String,String>();
-/*		testcaseDetails.put("tS", "TestSuite:");
+    	testcaseDetails.put("tS", "TestSuite:");
 		testcaseDetails.put("tc", "TestCases:");
-		testcaseDetails.put("tStep", "TestSteps:");*/
+		testcaseDetails.put("tStep", "TestSteps:");
 		
 		testcaseDetails.put("tSdesc", "LoginTestSuite");
 		testcaseDetails.put("tCdesc", "TC_01_LoginTestCase");
@@ -141,7 +143,7 @@ public class FinalPDFReport {
 		tStepsImages.put("Step4", "D:\\API\\Flipkart_ClickonLoginButton.png");
 		
 		FinalPDFReport f=new FinalPDFReport();
-		f.createResultPDF( testcaseDetails, tSteps,  tStepsImages );
+	//	f.createResultPDF( testcaseDetails, tSteps,  tStepsImages );
 		System.out.println("PDF generated");
 		
 	}

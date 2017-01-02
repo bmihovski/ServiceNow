@@ -1,0 +1,28 @@
+u_name,u_number,u_order,u_test_case,u_field_name,u_value,u_active,u_step_type.u_name
+Open new change,TCS000001016,100,c95e76f4db33220075277befbf961916,,https://dev23996.service-now.com/nav_to.do?uri=change_request.do?sys_id=-1,true,
+Enter Short Description,TCS000001017,200,c95e76f4db33220075277befbf961916,short_description,Change raised by automated testing,true,
+Click Submit,TCS000001018,300,c95e76f4db33220075277befbf961916,sysverb_insert,,true,
+Click on URL,TCS000001032,100,584fa230db33220075277befbf96198c,,https://dev23996.service-now.com,true,openURL
+Enter User name field,TCS000001033,110,584fa230db33220075277befbf96198c,user_name@id,admin,true,enterText
+Enter password,TCS000001034,120,584fa230db33220075277befbf96198c,user_password@id,Google@123,true,enterText
+Click Login Button,TCS000001035,140,584fa230db33220075277befbf96198c,sysverb_login@id,,true,click
+Click on the incident creation URL,TCS000001007,160,584fa230db33220075277befbf96198c,,https://dev23996.service-now.com/nav_to.do?uri=incident.do?sys_id=-1,true,openURL
+Enter Caller,TCS000001008,180,584fa230db33220075277befbf96198c,sys_display.incident.caller_id@id,Mabel Weeden,true,enterText
+Enter Short Description,TCS000001009,200,584fa230db33220075277befbf96198c,"//input[contains(@id,'short_description')]@xpath",This is a test incident using automated script,true,enterText
+Click Submit,TCS000001010,220,584fa230db33220075277befbf96198c,sysverb_insert@id,,true,click
+Click on URL,TCS000001002,1,f8d0dc27db23220075277befbf9619ce,,https://dev23996.service-now.com,true,openURL
+Enter User name field,TCS000001003,2,f8d0dc27db23220075277befbf9619ce,user_name@id,admin,true,enterText
+Enter password,TCS000001005,3,f8d0dc27db23220075277befbf9619ce,user_password@id,Google@123,true,enterText
+Click Login Button,TCS000001006,4,f8d0dc27db23220075277befbf9619ce,sysverb_login@id,,true,click
+Open the change,TCS000001022,100,7af24378db33220075277befbf9619d2,,https://dev23996.service-now.com/nav_to.do?uri=change_request.do?sys_id=a89f7238db33220075277befbf96,true,
+Open the change,TCS000001019,100,04610f38db33220075277befbf96191f,,https://dev23996.service-now.com/nav_to.do?uri=change_request.do?sys_id=a89f7238db33220075277befbf96,true,
+Enter Short Description,TCS000001020,200,04610f38db33220075277befbf96191f,short_description,This change is updated via Automated test script,true,
+Enter Short Description,TCS000001023,200,7af24378db33220075277befbf9619d2,short_description,This change is updated via Automated test script2,true,
+Update Change,TCS000001024,300,7af24378db33220075277befbf9619d2,sysverb_update,,true,
+Update Change,TCS000001021,300,04610f38db33220075277befbf96191f,sysverb_update,,true,
+Login to ServiceNow,TCS000001029,100,935cfab4db33220075277befbf9619f9,,,true,Login
+Open Incident,TCS000001012,200,935cfab4db33220075277befbf9619f9,,,true,openURL
+Enter category,TCS000001014,300,935cfab4db33220075277befbf9619f9,category,Software,true,enterText
+Enter subcategory,TCS000001013,400,935cfab4db33220075277befbf9619f9,subcategory,Email,true,enterText
+Click Update,TCS000001015,500,935cfab4db33220075277befbf9619f9,sysverb_update,,true,click
+Logout from ServiceNow,TCS000001030,600,935cfab4db33220075277befbf9619f9,,,true,Logout

@@ -25,6 +25,10 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.json.CDL;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +41,7 @@ import com.service.config.AppConfiguration;
  
 public class ServiceNowAPIS {
 	
-	public String getTestDetails(String url,String path) throws ParseException, IOException  {
+	public String getTestDetails(String url,String path,String jsonfilterparameter) throws ParseException, IOException  {
 		
 	       String responseBody=null;
  		CredentialsProvider credsProvider = new BasicCredentialsProvider();
@@ -50,16 +54,16 @@ public class ServiceNowAPIS {
  
         try {
         	System.out.println("base url is ---"+url+path);
-            HttpGet httpget = new HttpGet(url+path);
-            httpget.setHeader("Accept", "application/json");
+            HttpGet httpget = new HttpGet(url+path+jsonfilterparameter);
+            httpget.setHeader("Accept", "application/json");          
             System.out.println("Executing request " + httpget.getRequestLine());
             CloseableHttpResponse response = httpclient.execute(httpget);
             try {
-                System.out.println("----------------------------------------");
+                System.out.println("-------------------------------------");
                 System.out.println(response.getStatusLine());
            
                   responseBody = EntityUtils.toString(response.getEntity());
-                  System.out.println("----------------------------------------"+responseBody);
+                  System.out.println("-------------------------"+responseBody);
          
             }catch(Exception e){
             	
@@ -77,7 +81,9 @@ public class ServiceNowAPIS {
 	public void convertFromJSONToCSV(String jsonString,String jsonArray,String filename ){
 
 		  JSONObject output;
-      	File file=new File("D:\\PDF_Test\\"+filename+".csv");
+		     JSONObject obj1 = null;
+		     
+      	File file=new File(System.getProperty("user.dir")+"\\csv\\"+filename+".csv");
 	        try {
 	        	  
 	
@@ -87,27 +93,38 @@ public class ServiceNowAPIS {
 	            String csv = CDL.toString(docs);  
 	            FileUtils.writeStringToFile(file, csv);
 	        	   }
-	      
+	    
 	            if(filename.equals("TestCase")){
 	            	output = new JSONObject(jsonString);
 	            	 JSONArray docsarray = new JSONArray();	            	 
 	            	 docsarray = output.getJSONArray(jsonArray);
 		            for (int i = 0, len = docsarray.length(); i < len; i++) {
-		                JSONObject obj = (JSONObject) docsarray.getJSONObject(i).remove("u_test_suite");
-		                 
+		                /*obj1 =   (JSONObject) docsarray.getJSONObject(i).get("u_test_suite");
+		        
+		               HashMap<String,Object> subJson=jsontoMap(obj1.toString() );
+		               subJson.remove("link");
+			            //System.out.println("value is-------"+subJson+"------------------");
+			             
+			      
+			              
+			             docsarray.put(subJson);
+			              System.out.println("value is-------"+docsarray+"------------------");
+			              docsarray.getJSONObject(i).remove("u_test_suite");
+			              System.out.println("value is-------"+docsarray+"------------------");*/
 		            }
 		            String csvtestcase = CDL.toString(docsarray);            
 		            FileUtils.writeStringToFile(file, csvtestcase);
 	            }
-	            
+	       
 	            if(filename.equals("TestSteps")){
 	            	output = new JSONObject(jsonString);
 	            	 JSONArray docsarray = new JSONArray();	            	 
 	            	 docsarray = output.getJSONArray(jsonArray);
-		            for (int i = 0, len = docsarray.length(); i < len; i++) {
+		           /* for (int i = 0, len = docsarray.length(); i < len; i++) {
 		                JSONObject obj = (JSONObject) docsarray.getJSONObject(i).remove("u_test_case");
-		                 
-		            }
+		              
+		            }*/
+		      
 		            String csvtestcase = CDL.toString(docsarray);            
 		            FileUtils.writeStringToFile(file, csvtestcase);
 	            }
@@ -121,6 +138,21 @@ public class ServiceNowAPIS {
 	        }        
 	    }
 
+	
+	public  HashMap< String, Object> jsontoMap(String json ) throws JsonParseException, JsonMappingException, IOException{
+		
+		  ObjectMapper mapper = new ObjectMapper();
+	      //  String json = "{\"name\":\"mkyong\", \"age\":29}";
+
+	        HashMap<String, Object> map = new HashMap<String, Object>();
+
+	        // convert JSON string to Map
+	        map = mapper.readValue(json, new TypeReference<Map<String, String>>(){});
+
+	        System.out.println(map);
+			return map;
+
+	}
  
 	
 	public static void main(String[] args) throws IOException, HttpException {
@@ -128,22 +160,29 @@ public class ServiceNowAPIS {
 		
 		//TestSuite CSV file Genaration 
 		ServiceNowAPIS sapis=new ServiceNowAPIS();
-		  String reponse=sapis.getTestDetails(AppConfiguration.baseUrl,ApiPaths.testSuites);
+		
+		String displayTestSuiteparmaeters="?sysparm_query=u_active%3Dtrue%5EORDERBYu_number%5EORDERBYu_order&sysparm_fields=u_name%2Csys_id%2Cu_number%2Cu_active";
+		String reponse=sapis.getTestDetails(AppConfiguration.baseUrl,ApiPaths.testSuites,displayTestSuiteparmaeters);
 		String Filename="TestSuite";
-		sapis.convertFromJSONToCSV(reponse,"result",Filename);
-		 
-		//TestCase CSV file Genaration 
-		 
-		String reponse_testcase=sapis.getTestDetails(AppConfiguration.baseUrl,ApiPaths.testCases);
+ 		sapis.convertFromJSONToCSV(reponse,"result",Filename);
+ 	 
+		//TestCase CSV file Genaration   
+	 	String displayTestCaseparmaeters="?sysparm_query=u_active%3Dtrue%5EORDERBYu_number%5EORDERBYu_order&sysparm_fields=u_name%2Csys_id%2Cu_number%2Cu_order%2Cu_active%2Cu_test_suite%2Csys_id%2Cu_description%3Dtrue&sysparm_exclude_reference_link=true";
+ 
+		String reponse_testcase=sapis.getTestDetails(AppConfiguration.baseUrl,ApiPaths.testCases,displayTestCaseparmaeters);
 		String fileName_testCases="TestCase";
 		sapis.convertFromJSONToCSV(reponse_testcase,"result",fileName_testCases);
-		
+	 
 		//TestCase CSV file Genaration 
-		 
-		 String reponse_testSteps=sapis.getTestDetails(AppConfiguration.baseUrl,ApiPaths.testSteps);
-		 String fileName_testSteps="TestSteps";
-		 sapis.convertFromJSONToCSV(reponse_testSteps,"result",fileName_testSteps);
-		 
+  
+		//String displayTestStepparameters="?sysparm_fields=u_name%2Cu_number%2Cu_order%2Cu_value%2Cu_step_type.u_value%2Cu_test_case%2Cu_field_name%2Cu_user_name%2Cu_active";
+		String displayTestStepparameters="?sysparm_query=u_active%3Dtrue%5EORDERBYu_number%5EORDERBYu_order&sysparm_fields=u_name%2Cu_number%2Cu_order%2Cu_value%2Cu_step_type.u_name%2Cu_test_case%2Cu_field_name%2Cu_active%3Dtrue&sysparm_exclude_reference_link=true";
+
+		// String displayTestStepparameters="?sysparm_fields=u_name%2Cu_number%2Cu_order%2Cu_value%2Cu_step_type.u_value%2Cu_test_case%2Cu_field_name%2Cu_user_name%2Cu_active";
+		String reponse_testSteps=sapis.getTestDetails(AppConfiguration.baseUrl,ApiPaths.testSteps,displayTestStepparameters);
+		String fileName_testSteps="TestSteps";
+		sapis.convertFromJSONToCSV(reponse_testSteps,"result",fileName_testSteps);
+	 
 		 
 	}
  	

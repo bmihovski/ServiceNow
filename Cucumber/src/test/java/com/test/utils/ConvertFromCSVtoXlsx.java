@@ -6,28 +6,27 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
+/*import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;*/
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.service.config.AppConfiguration;
 
 public class ConvertFromCSVtoXlsx {
 	
-	public static void csvToXLSX(HSSFWorkbook workBook,String filename, String sheetno) {
+	public   void csvToXLSX(XSSFWorkbook workBook,String filename, String sheetno) {
         try {
             String csvFile = filename; //csv file address
             String excelFile = AppConfiguration.filepathexcel;            
-            HSSFSheet sheet = workBook.createSheet( filename.split("\\W+")[2]);
+            XSSFSheet sheet = workBook.createSheet( filename.split("\\W+")[7]);
             String currentLine = null;
             int RowNum = 0;
             BufferedReader br = new BufferedReader(new FileReader(csvFile));
             while ((currentLine = br.readLine()) != null) {
                 String str[] = currentLine.split(",");
-                HSSFRow currentRow = sheet.createRow(RowNum);
+                XSSFRow currentRow = sheet.createRow(RowNum);
                 RowNum++;
                 for (int i = 0; i < str.length; i++) {
                     currentRow.createCell(i).setCellValue(str[i]);
@@ -53,9 +52,9 @@ public class ConvertFromCSVtoXlsx {
 		String detxlxs="D:\\PDF_Test\\test.xlsx";
 		 
 		   int size = filepathList.size();
-		 HSSFWorkbook workBook = new HSSFWorkbook();
+		   XSSFWorkbook workBook = new XSSFWorkbook();
 	        for (int i = 0; i < size; i++) {
-	            csvToXLSX(workBook,filepathList.get(i).toString(), "sheet" + i + 1);
+	            cfs.csvToXLSX(workBook,filepathList.get(i).toString(), "sheet" + i + 1);
 	        }
 		
 	}

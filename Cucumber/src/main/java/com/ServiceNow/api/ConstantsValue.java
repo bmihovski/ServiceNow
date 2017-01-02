@@ -1,18 +1,17 @@
 package com.ServiceNow.api;
 
 public interface ConstantsValue {
+ 
+	public String filepathScreenshot="D:\\API\\";
+	public String filepath=System.getProperty("user.dir")+"\\csv\\";
+/*String displayTestSuiteparmaeters="?sysparm_query=u_active%3Dtrue%5EORDERBYu_number%5EORDERBYu_order&sysparm_fields=u_name%2Csys_id%2Cu_number%2Cu_active";
+String displayTestCaseparmaeters="?sysparm_query=u_active%3Dtrue%5EORDERBYu_number%5EORDERBYu_order&sysparm_fields=u_name%2Csys_id%2Cu_number%2Cu_order%2Cu_active%2Cu_test_suite%2Csys_id%2Cu_description%3Dtrue&sysparm_exclude_reference_link=true";
+String displayTestStepparameters="?sysparm_query=u_active%3Dtrue%5EORDERBYu_number%5EORDERBYu_order&sysparm_fields=u_name%2Cu_number%2Cu_order%2Cu_value%2Cu_step_type.u_name%2Cu_test_case%2Cu_field_name%2Cu_active%3Dtrue&sysparm_exclude_reference_link=true";
+*/
 
-	public static final String accountAdmin = "AccountAdmin";
-	public static final String mediaAdmin = "Media Admin";
-	public static final String mediaViewer = "Media Viewer";
-	public static final String eventAdmin = "Event Admin";
-	public static final String mediaContributor = "Media Contributor";
-	public static final String baseUrl = "https://qa-u1204-ha-31.lab.vbrick.com/";
-	public static final String APIkey = "12345";
-	public static final String secretkey = "C5AS3Szqtt6fCA8gOWAiFASkp84LGRSE4nLCYvkfzmVJvS/5dt+HBeX5V/oHDP0rQMTeQ35oYcWu9rYXVncjA321YlJrY0UOYBy91Ntp4Kn7cli9VxfTnoDN4ikOIuX+igwQKR76urMdetuMDhl1QLoJiuFFDwVBVCl+X6y0C80=";
+String displayTestSuiteparmaeters="?sysparm_query=u_active%3Dtrue%5EORDERBYu_number%5EORDERBYu_order&sysparm_fields=u_name%2Csys_id%2Cu_number%2Cu_active";
+String displayTestCaseparmaeters="?sysparm_query=u_active%3Dtrue%5EORDERBYu_number%5EORDERBYu_order&sysparm_fields=u_name%2Csys_id%2Cu_number%2Cu_order%2Cu_active%2Cu_test_suite%2Csys_id%2Cu_description%3Dtrue&sysparm_exclude_reference_link=true";
+String displayTestStepparameters="?sysparm_query=u_active%3Dtrue%5EORDERBYu_test_case%5EORDERBYu_order%5EORDERBYu_test_case&sysparm_fields=u_name%2Cu_number%2Cu_order%2Cu_active%2Cu_value%2Cu_step_type.u_name%2Cu_test_case%2Cu_field_name%2Cu_active%3Dtrue&sysparm_exclude_reference_link=true";
 
-	public static final String errorcode = "UserCannotBeCreated";
-	public static final String detailError = "VBrickPlatform.IssueDetail = RequiredFieldMissing = Following required field is found missing in the request : UserName";
-	
-	public static final String USERNAME="rootqa",PASSWORD="vbqa";
+public  String TestDataFile=System.getProperty("user.dir")+"\\TestData\\test.xlsx";;
 }

@@ -5,5 +5,5 @@ public interface AppConfiguration {
 	public String httpHost="dev23996.service-now.com";
 	public String apiUserName="admin";
 	public String  apiPWd="Google@123";
-    public String filepathexcel="D:\\PDF_Test\\test.xls";
+    public String filepathexcel=System.getProperty("user.dir")+"\\TestData\\test.xlsx";
 }

@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="0" passed="0">
+<testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="12" started-at="2016-12-08T14:04:49Z" finished-at="2016-12-08T14:04:49Z">
+  <suite name="Default suite" duration-ms="339839" started-at="2017-01-02T06:37:18Z" finished-at="2017-01-02T06:42:58Z">
     <groups>
     </groups>
-    <test name="cucumber" duration-ms="12" started-at="2016-12-08T14:04:49Z" finished-at="2016-12-08T14:04:49Z">
-    </test> <!-- cucumber -->
-  </suite> <!-- Suite -->
+    <test name="Default test" duration-ms="339839" started-at="2017-01-02T06:37:18Z" finished-at="2017-01-02T06:42:58Z">
+      <class name="com.ServiceNow.TestCases.ServiceNowLogin">
+        <test-method status="PASS" signature="initilazation()[pri:0, instance:com.ServiceNow.TestCases.ServiceNowLogin@16d04d3d]" name="initilazation" is-config="true" duration-ms="81666" started-at="2017-01-02T12:07:18Z" finished-at="2017-01-02T12:08:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initilazation -->
+        <test-method status="PASS" signature="start()[pri:0, instance:com.ServiceNow.TestCases.ServiceNowLogin@16d04d3d]" name="start" is-config="true" duration-ms="1" started-at="2017-01-02T12:08:39Z" finished-at="2017-01-02T12:08:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- start -->
+        <test-method status="PASS" signature="TC_001_ServiceNow_Login_TestCases()[pri:0, instance:com.ServiceNow.TestCases.ServiceNowLogin@16d04d3d]" name="TC_001_ServiceNow_Login_TestCases" duration-ms="95691" started-at="2017-01-02T12:08:39Z" description="TC_001_ServiceNow Login TestCases" finished-at="2017-01-02T12:10:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_001_ServiceNow_Login_TestCases -->
+        <test-method status="PASS" signature="incidentCreation()[pri:0, instance:com.ServiceNow.TestCases.ServiceNowLogin@16d04d3d]" name="incidentCreation" duration-ms="162455" started-at="2017-01-02T12:10:15Z" description="Crreate Incident in ServiceNow app" finished-at="2017-01-02T12:12:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- incidentCreation -->
+        <test-method status="PASS" signature="start()[pri:0, instance:com.ServiceNow.TestCases.ServiceNowLogin@16d04d3d]" name="start" is-config="true" duration-ms="0" started-at="2017-01-02T12:10:15Z" finished-at="2017-01-02T12:10:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- start -->
+        <test-method status="PASS" signature="generatePDFReport()[pri:0, instance:com.ServiceNow.TestCases.ServiceNowLogin@16d04d3d]" name="generatePDFReport" is-config="true" duration-ms="0" started-at="2017-01-02T12:12:58Z" finished-at="2017-01-02T12:12:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- generatePDFReport -->
+      </class> <!-- com.ServiceNow.TestCases.ServiceNowLogin -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>
